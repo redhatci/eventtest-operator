@@ -1,0 +1,22 @@
+---
+- name: Trigger send_events.py
+  ansible.builtin.shell:
+    cmd: /opt/ansible/scripts/send_events.py
+
+- name: Get EventTest information
+  community.kubernetes.k8s_info:
+    api_version: eventtest.com/v1
+    kind: EventTest
+  register: eventtest_info
+
+- name: Increase eventCount
+  community.kubernetes.k8s:
+    api_version: eventtest.com/v1
+    kind: EventTest
+    name: my-eventtest
+    namespace: "default"
+    definition:
+      spec:
+        eventCount: "{{ (eventtest_info.resources[0].spec.eventCount | int) + 1 }}"
+    merge_type: merge
+...

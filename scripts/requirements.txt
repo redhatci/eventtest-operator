@@ -1,0 +1,4 @@
+# Pinning deprecated dependency 
+# To use EventsV1beta1Api instead of EventsV1Api in send_events
+# https://github.com/kubernetes-client/python/releases/tag/v24.2.0
+kubernetes==24.2.0

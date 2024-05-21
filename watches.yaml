@@ -1,0 +1,5 @@
+- version: v1
+  group: eventtest.com
+  kind: EventTest
+  role: /opt/ansible/roles/eventtest
+  ansibleNamespace: default

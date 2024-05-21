@@ -1,0 +1,30 @@
+# https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: eventtests.eventtest.com
+spec:
+  group: eventtest.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      # Support status subresource required by ansible-operator
+      subresources:
+        status: {}
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                eventCount:
+                  type: string
+  scope: Namespaced
+  names:
+    plural: eventtests
+    singular: eventtest
+    kind: EventTest
+    shortNames:
+    - et

@@ -1,0 +1,16 @@
+---
+- name: Connect to cluster and list nodes
+  hosts: local
+  tasks:
+    - name: List nodes using the shell module
+      shell: oc get nodes
+      register: node_list
+
+    - name: Detect to-be-Removed APIs in all namespaces excluding ones starting with openshift and kube-
+      include_role:
+        name: redhatci.ocp.deprecated_api
+      vars:
+        ocp_version: "4.11"
+        job_logs:
+          path: "{{ playbook_dir }}"
+      register: compatibility_map

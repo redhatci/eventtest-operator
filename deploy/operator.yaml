@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventtest-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: eventtest-operator
+  template:
+    metadata:
+      labels:
+        name: eventtest-operator
+    spec:
+      serviceAccountName: eventtest-operator-service-account
+      containers:
+      - name: eventtest-operator
+        # Image containing ansible role to reconcile
+        image: quay.io/tkrishtop/eventtest-operator:latest
+        # Required to see logs from the ansible tasks
+        # in the controller output
+        env:
+          - name: ANSIBLE_DEBUG_LOGS
+            value: "True"
