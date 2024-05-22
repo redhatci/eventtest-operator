@@ -1,8 +1,8 @@
 # Design
 
-At every reconciliation, the operator sends an event using the `EventsV1beta1Api` and re-triggers the reconciliation. 
+At every reconciliation, the operator sends an event using the `events.k8s.io/v1beta1` and re-triggers the reconciliation.
 
-The API `EventsV1beta1Api` is deprecated in OCP 4.12. In the eventest-operator, it's not used directly from the manifest but through the kubernetes Python package. We are going to simulate an upgrade from OCP 4.11 to OCP 4.13 and demostrated the problems with the application by running two demos:
+The API `events.k8s.io/v1beta1` is deprecated in OCP 4.12. In the eventest-operator, it's not used directly from the manifest but through the kubernetes Python package. We are going to simulate an upgrade from OCP 4.11 to OCP 4.13 and demostrate the deprecated-api problems with the application by running two demos:
 
 - On OCP 4.13, showing how difficult it is to detect and debug the deprecated API inside the application since it will only manifest at runtime.
 - On OCP 4.11, showcasing an Ansible role from the redhatci.ocp Ansible Galaxy collection, allowing us to detect possible problems in advance.
@@ -12,6 +12,8 @@ The API `EventsV1beta1Api` is deprecated in OCP 4.12. In the eventest-operator, 
 ## Demo-1 on CRC 2.26.0-4.13.9
 
 The goal is to demonstrate the issue occurring when the deprecated API manifests only at runtime after the OCP upgrade. This happens when the deprecated API is not in the manifest but within the software using a deprecated Kubernetes package (Golang, Python, etc.). In our case, it's a Python package `kubernetes==24.2.0` offering API `events.k8s.io/v1beta1`, which is removed in OCP 4.12 / K8s v1.25. The deprecation is showcased on [CRC 2.26.0-4.13.9](https://github.com/crc-org/crc/releases/tag/v2.26.0).
+
+[Video: DevConf 2024: OCP 4.13 Demo - Deprecated API Manifestation at Runtime](https://www.youtube.com/watch?v=3uItlBAD9u8).
 
 1. Install CRC 2.26.0-4.13.9 following the [official guide](https://crc.dev/crc/)
 
@@ -74,6 +76,8 @@ task path: /opt/ansible/roles/eventtest/tasks/main.yml:2
 ## Demo-2 on CRC 2.12.0-4.11.18
 
 This demo shows how to ensure API validity before the OCP upgrade. We run the operator on [CRC 2.12.0-4.11.18](https://github.com/crc-org/crc/releases/tag/v2.12.0) where API `events.k8s.io/v1beta1` is not yet deprecated. We detect the soon-to-be deprecated situation using the [deprecated-api](https://github.com/redhatci/ansible-collection-redhatci-ocp/tree/main/roles/deprecated_api) role from redhat.ocp ansible-galaxy collection.
+
+[Video: DevConf 2024: OCP 4.11 Demo - Detecting Deprecated APIs with RedHatCI.OCP Collection](https://www.youtube.com/watch?v=vGOmImI2G0w).
 
 1. Start CRC cluster and deploy the eventtest-operator on it
 
