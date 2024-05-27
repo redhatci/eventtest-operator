@@ -2,7 +2,5 @@ apiVersion: eventtest.com/v1
 kind: EventTest
 metadata:
   name: my-eventtest
-# annotations:
-#   ansible.operator-sdk/reconcile-period: "30s"
 spec:
   eventCount: "0"
