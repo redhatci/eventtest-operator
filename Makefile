@@ -10,10 +10,10 @@ all:
 	kubectl apply -f deploy/operator.yaml
 
 deploy-all:
-	oc apply -f deploy/crds/eventtest_v1_eventtest_crd.yaml
-	oc apply -f deploy/crds/eventtest_v1_eventtest_cr.yaml
-	oc apply -f rbac/eventtest_operator_service_account.yaml
-	oc apply -f deploy/operator.yaml
+	kubectl apply -f deploy/crds/eventtest_v1_eventtest_crd.yaml
+	kubectl apply -f deploy/crds/eventtest_v1_eventtest_cr.yaml
+	kubectl apply -f rbac/eventtest_operator_service_account.yaml
+	kubectl apply -f deploy/operator.yaml
 
 show:
 	- kubectl get crds | grep event
@@ -21,8 +21,7 @@ show:
 	- kubectl get pods
 
 logs:
-	# kubectl logs -f -l name=eventtest-operator
-	oc logs -l name=eventtest-operator --tail=100 -n $(NAMESPACE) | grep 'Not Found' -B 2
+	kubectl logs -l name=eventtest-operator --tail=100 -n $(NAMESPACE) | grep 'Not Found' -B 2
 
 remove-all: 
 	- kubectl delete -f deploy/operator.yaml
