@@ -2,6 +2,8 @@
 
 At every reconciliation, the operator sends an event using the `events.k8s.io/v1beta1` and re-triggers the reconciliation.
 
+![diagram](images/diagram.png)
+
 The API `events.k8s.io/v1beta1` is deprecated in OCP 4.12. In the eventest-operator, it's not used directly from the manifest but through the kubernetes Python package. We are going to simulate an upgrade from OCP 4.11 to OCP 4.13 and demostrate the deprecated-api problems with the application by running two demos:
 
 - On OCP 4.13, showing how difficult it is to detect and debug the deprecated API inside the application since it will only manifest at runtime.
