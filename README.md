@@ -94,7 +94,7 @@ $ crc-2.12 setup
 $ crc-2.12 start
 
 # login as kubeadmin
-$ eval $(crc oc-env)
+$ eval $(crc-2.12 oc-env)
 $ oc login -u kubeadmin https://api.crc.testing:6443
 
 # deploy the operator

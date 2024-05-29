@@ -6,7 +6,6 @@
       include_role:
         name: redhatci.ocp.deprecated_api
       vars:
-        ocp_version: "4.11"
         deprecated_api_logs:
           path: "{{ playbook_dir }}"
       register: compatibility_map
