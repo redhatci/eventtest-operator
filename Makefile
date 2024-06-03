@@ -16,7 +16,7 @@ deploy-all:
 	kubectl apply -f deploy/operator.yaml
 
 show:
-	- kubectl get crds | grep event
+	- kubectl get crds | grep eventtest
 	- kubectl get eventtests -n $(NAMESPACE)
 	- kubectl get pods
 

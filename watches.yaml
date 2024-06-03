@@ -1,3 +1,4 @@
+# https://sdk.operatorframework.io/docs/building-operators/ansible/reference/watches/
 - version: v1
   group: eventtest.com
   kind: EventTest
